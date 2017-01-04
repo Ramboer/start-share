@@ -36,8 +36,15 @@ public class Client {
         });
         try {
             ChannelFuture f = client.connect(ip, port).sync();
-            System.out.println("connect to server : " + ip + " : " + port);
+//            System.out.println("connect to server : " + ip + " : " + port);
             channel = f.channel();
+            f.addListener(new ChannelFutureListener() {
+                public void operationComplete(ChannelFuture future) throws Exception {
+                    if (future.isSuccess()) {
+                        System.out.println("connect to server :" + channel.remoteAddress() + " successful!");
+                    }
+                }
+            });
             channel.closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
