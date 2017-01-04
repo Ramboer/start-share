@@ -1,3 +1,5 @@
+package share;
+
 /**
  * Created by simon.liu on 2017/1/4.
  */
